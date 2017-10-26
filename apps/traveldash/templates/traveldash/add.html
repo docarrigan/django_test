@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Travel Dashboard</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<style>
+		.col-lg-6 {
+			text-align: center;
+			border: 1px solid black;
+		}
+		p,li {
+			text-align: left;
+		}
+	</style>
+</head>
+<body>
+
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	  <a class="navbar-brand" href="/">TRIP PLANNER</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+	    <div class="navbar-nav">
+	      <a class="nav-item nav-link" href="/trips">Trips</a>
+	      <a class="nav-item nav-link" href="/add">Add New Trip</a>
+	      <a class="nav-item nav-link disabled" href="/logout">Logout</a>
+	    </div>
+	  </div>
+	</nav>
+
+<h4>Start a New Trip!</h4>
+	<form action="/addtrip" method="POST">
+		{% csrf_token %}
+		<p>Destination: <input type="text" name="destination"></p>
+		<p>Description: <input type="text" name="description"></p>
+		<p>Start Date: <input type="date" name="start"></p>
+		<p>End Date: <input type="date" name="end"></p>
+		<input type="submit" value="Add Trip"></p>
+	</form>
+{% for message in messages %}
+	{{message}}
+{% endfor %}
+</body>
+</html>

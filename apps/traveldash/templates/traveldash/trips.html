@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Travel Dashboard</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<style>
+		.col-lg-6 {
+			text-align: center;
+			border: 1px solid black;
+		}
+		p,li {
+			text-align: left;
+		}
+	</style>
+</head>
+<body>
+
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	  <a class="navbar-brand" href="/">TRIP PLANNER</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+	    <div class="navbar-nav">
+	      <a class="nav-item nav-link" href="/trips">Trips</a>
+	      <a class="nav-item nav-link" href="/add">Add New Trip</a>
+	      <a class="nav-item nav-link disabled" href="/logout">Logout</a>
+	    </div>
+	  </div>
+		<p> You are logged in as {{users.username}}</p>
+	</nav>
+
+
+<h4 style="margin:20px;""> Your Trips</h4>
+	<table class="table table-striped" style="margin:20px;">
+	  <thead>
+	    <tr>
+	      <th scope="col">Destination</th>
+	      <th scope="col">Start</th>
+	      <th scope="col">End</th>
+	      <th scope="col">Description</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    {% for trip in mytrips %}
+		    <tr>
+		      <td>{{trip.destination}}</td>
+		      <td>{{trip.start}}</td>
+		      <td>{{trip.end}}</td>
+		      <td>{{trip.description}}</td>
+		    </tr>
+	    {% endfor %}
+	  </tbody>
+	</table>
+
+<h4 style="margin:20px;""> Other Available Trips</h4>
+	<table class="table table-striped" style="margin:20px;">
+	  <thead>
+	    <tr>
+	      <th scope="col">Trip Owner</th>
+	      <th scope="col">Destination</th>
+	      <th scope="col">Start</th>
+	      <th scope="col">End</th>
+	      <th scope="col">Description</th>
+	      <th scope="col">Want To Join?</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    {% for trip in trips %}
+	    	{% if trip.owner.id != users.id %}
+			    <tr>
+					<td>{{trip.owner.name}}</td>
+					<td>{{trip.destination}}</td>
+					<td>{{trip.start}}</td>
+					<td>{{trip.end}}</td>
+					<td>{{trip.description}}</td>
+					<td><a href="/join/{{trip.id}}">Join Trip</a>
+			    </tr>
+	    	{% endif %}
+	    {% endfor %}
+	  </tbody>
+	</table>
+</body>
+</html>
